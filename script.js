@@ -1,7 +1,8 @@
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+function sleep() {
+    return new Promise(resolve => setTimeout(resolve, delay));
 }
 
+let delay = 100;
 
 let array = [];
 const container = document.getElementById("array-container");
@@ -68,7 +69,7 @@ async function partition(low, high) {
 
     for (let j = low; j < high; j++) {
         bars[j].style.background = "red";
-        await sleep(100);
+        await sleep();
 
         if (array[j] < pivot) {
             i++;
@@ -115,7 +116,7 @@ async function merge(left, mid, right) {
 
     while (i < n1 && j < n2) {
         bars[k].style.background = "red";
-        await sleep(100);
+        await sleep();
 
         if (leftArr[i] <= rightArr[j]) {
             array[k] = leftArr[i];
@@ -133,7 +134,7 @@ async function merge(left, mid, right) {
 
     while (i < n1) {
         bars[k].style.background = "red";
-        await sleep(100);
+        await sleep();
 
         array[k] = leftArr[i];
         bars[k].style.height = `${leftArr[i]}px`;
@@ -144,7 +145,7 @@ async function merge(left, mid, right) {
 
     while (j < n2) {
         bars[k].style.background = "red";
-        await sleep(100);
+        await sleep();
 
         array[k] = rightArr[j];
         bars[k].style.height = `${rightArr[j]}px`;
@@ -163,3 +164,11 @@ async function mergeSort(left, right) {
     await mergeSort(mid + 1, right);
     await merge(left, mid, right);
 }
+
+const speedSlider = document.getElementById("speed");
+
+speedSlider.addEventListener("input", () => {
+    delay = speedSlider.value;
+});
+
+
